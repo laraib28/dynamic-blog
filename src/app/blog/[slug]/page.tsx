@@ -8,7 +8,7 @@ interface Params {
   params: { slug: string }
 }
 
-interface BlogPostProps {
+interface BlogPost {
   data: Blog
 }
 
