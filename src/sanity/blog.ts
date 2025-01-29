@@ -7,7 +7,7 @@ export default defineType({
   fields: [
     defineField({
       name: "heading",
-      title: "Heading", // Correct spelling here
+      title: "Heading", 
       type: "string",
     }),
     defineField({
@@ -20,7 +20,7 @@ export default defineType({
       title: "Slug",
       type: "slug",
       options: {
-        source: "heading", // Use 'heading' to generate slug
+        source: "heading", 
         maxLength: 200,
       },
     }),

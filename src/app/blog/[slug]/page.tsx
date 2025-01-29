@@ -1,24 +1,29 @@
+"use client"
 import { client } from "@/sanity/lib/client";
 import Image from "next/image";
 import { Blog } from "@/app/page";
 import CommentSection from "@/app/components/comment";
 
-// Define Params interface
 interface Params {
-  params: { slug: string };
+  slug: string;
 }
 
-// Define BlogPost component
-const BlogPost = async ({ params }: Params) => {
+const BlogPost = async ({ params }: { params: Params }) => {
   const { slug } = params;
+  console.log('Slug:', slug); // Check if the slug is being passed properly
 
-  // Fetch blog data from Sanity
   const data: Blog | null = await client.fetch(
-    `*[_type == "blog" && slug.current == $slug]{heading, description, "slug": slug.current, "imageUrl": image.asset->url}[0]`,
+    `*[_type == "blog" && slug.current == $slug][0]{
+      heading,
+      description,
+      "slug": slug.current,
+      "imageUrl": image.asset->url
+    }`,
     { slug }
   );
 
-  // Handle case when data is null
+  console.log('Fetched Data:', data); // Check if data is being fetched
+
   if (!data) {
     return (
       <main className="max-w-5xl my-20 mx-auto p-4 text-center">
